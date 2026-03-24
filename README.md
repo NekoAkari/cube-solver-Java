@@ -16,12 +16,12 @@ I’m rebuilding my earlier cube-solver attempt with a stronger focus on:
 - Engineering quality (CI, documentation, benchmarks)
 
 ## Current status
-- ✅ Maven project (Java 17) with JUnit 5
-- ✅ JaCoCo coverage report
-- ✅ 2×2 cube model (corner permutation/orientation), **immutable** state
-- ✅ Move utilities: ``from(...)``, ``inverse()``, ``parse(...)`` (U/R/F notation)
-- ✅ Implemented face: **U** quarter-turn (R/F planned)
-- ✅ Tests:
+- ✓ Maven project (Java 17) with JUnit 5
+- ✓ JaCoCo coverage report
+- ✓ 2×2 cube model (corner permutation/orientation), **immutable** state
+- ✓ Move utilities: ``from(...)``, ``inverse()``, ``parse(...)`` (U/R/F notation)
+- ✓ Implemented face: **U** quarter-turn (R/F planned)
+- ✓ Tests:
   - Property tests (identity/inverse) that automatically skip unimplemented moves
   - Boundary/negative tests for invalid inputs and branch coverage
 

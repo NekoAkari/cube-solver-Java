@@ -1,7 +1,7 @@
 package solver.model;
 
 /**
- * Initial move set: U / R / F with { , ', 2 } variants.
+ * Initial move set: U / R / F with { (clockwise), ' (counter-clockwise), 2 (half-turn) } variants.
  *
  * <p>Notation examples:
  * <ul>
@@ -19,7 +19,8 @@ public enum Move {
     public enum Face { U, R, F }
 
     private final Face face;
-    private final int turns; // 1,2,3 quarter-turns
+    /** Number of clockwise quarter-turns: 1=90°, 2=180°, 3=270° (i.e., counter-clockwise). */
+    private final int turns;
 
     Move(Face face, int turns) {
         this.face = face;
@@ -32,7 +33,14 @@ public enum Move {
     }
 
     /**
-     * Returns the inverse move.
+     * @return number of clockwise quarter-turns: 1 = 90°, 2 = 180°, 3 = 270° (i.e., counter-clockwise)
+     */
+    public int turns() {
+        return turns;
+    }
+
+    /**
+     * Returns the inverse of this move.
      *
      * <p>Examples:
      * <ul>
@@ -40,13 +48,8 @@ public enum Move {
      *   <li>{@code U2} ↔ {@code U2}</li>
      * </ul>
      *
-     * @return the inverse of this move
+     * @return the inverse move
      */
-    public int turns() {
-        return turns;
-    }
-
-    /** Returns the inverse move (e.g., U <-> U', U2 -> U2). */
     public Move inverse() {
         if (turns == 2) return this;
         int invTurns = 4 - turns; // 1->3, 3->1
@@ -63,7 +66,7 @@ public enum Move {
      */
     public static Move from(Face face, int turns) {
         if (turns < 1 || turns > 3) {
-            throw new IllegalArgumentException("Turns must be between 1 and 3 (got: " + turns + ")");
+            throw new IllegalArgumentException("turns must be 1, 2, or 3 (got " + turns + ")");
         }
         return switch (face) {
             case U -> (turns == 1) ? U : (turns == 2) ? U2 : UP;
@@ -84,11 +87,11 @@ public enum Move {
      */
     public static Move parse(String token) {
         if (token == null) {
-            throw new IllegalArgumentException("Token cannot be null");
+            throw new IllegalArgumentException("token cannot be null");
         }
         String t = token.trim();
         if (t.isEmpty()) {
-            throw new IllegalArgumentException("Token cannot be empty");
+            throw new IllegalArgumentException("token cannot be empty");
         }
 
         // Face letter
@@ -104,6 +107,13 @@ public enum Move {
         return from(face, turns);
     }
 
+    /**
+     * Parses the optional suffix of a token to determine the number of quarter-turns.
+     *
+     * @param t trimmed token string
+     * @return 1 for no suffix, 2 for '2', 3 for prime (')
+     * @throws IllegalArgumentException if the suffix/length is invalid
+     */
     private static int getTurns(String t) {
         int turns;
         if (t.length() == 1) {
@@ -123,7 +133,8 @@ public enum Move {
         return turns;
     }
 
-    /** @return standard cube notation for this move (e.g., "U", "R2", "F'"). */    @Override
+    /** @return standard cube notation for this move (e.g., "U", "R2", "F'"). */
+    @Override
     public String toString() {
         return switch (this) {
             case U -> "U"; case U2 -> "U2"; case UP -> "U'";

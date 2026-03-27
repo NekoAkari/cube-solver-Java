@@ -2,8 +2,9 @@
 
 ## 2026-03-26
 - Implemented `R` quarter-turn in `solver.model.CubeState`
+- Implemented `F` quarter-turn in `solver.model.CubeState`
 - Improved move property tests so implemented moves are still checked even when later moves remain unimplemented
-- Added a direct state assertion for `R` from the solved cube
+- Added direct state assertions for `R` and `F` from the solved cube
 - Verified with `mvn test`
 
 ## 2026-02-06
@@ -17,6 +18,6 @@
 - Pushed commits to GitHub (`main` up to date)
 
 ### Next
-- [ ] Implement quarter-turn logic for F in `CubeState.applyQuarter()`
 - [ ] Add a simple scramble parser/formatter (optional)
 - [ ] Start solver search package (`solver.search`) with a baseline IDDFS skeleton
+- [ ] Add remaining face turns (D/L/B) or decide to keep the solver scoped to the current U/R/F generator set

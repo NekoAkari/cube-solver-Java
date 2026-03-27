@@ -80,8 +80,7 @@ public final class CubeState {
         return switch (face) {
             case U -> applyUQuarter();
             case R -> applyRQuarter();
-            case F -> throw new UnsupportedOperationException(
-                    "applyQuarter(" + face + ") not implemented yet");
+            case F -> applyFQuarter();
         };
     }
 
@@ -120,6 +119,27 @@ public final class CubeState {
             int src = permR[pos];
             newCp[pos] = cp[src];
             newCo[pos] = (byte) ((co[src] + deltaR[pos]) % 3);
+        }
+
+        return new CubeState(newCp, newCo);
+    }
+
+    /**
+     * F clockwise: cycles the front-layer corners (0,4,5,1) and twists the moved corners.
+     */
+    private CubeState applyFQuarter() {
+        // new[pos] = old[permF[pos]]
+        final int[] permF = {1, 5, 2, 3, 0, 4, 6, 7};
+        // Corner orientation deltas in standard cubie coordinates.
+        final int[] deltaF = {1, 2, 0, 0, 2, 1, 0, 0};
+
+        byte[] newCp = new byte[8];
+        byte[] newCo = new byte[8];
+
+        for (int pos = 0; pos < 8; pos++) {
+            int src = permF[pos];
+            newCp[pos] = cp[src];
+            newCo[pos] = (byte) ((co[src] + deltaF[pos]) % 3);
         }
 
         return new CubeState(newCp, newCo);

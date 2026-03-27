@@ -69,6 +69,14 @@ class MovePropertiesTest {
         assertArrayEquals(new byte[]{2, 0, 0, 1, 1, 0, 0, 2}, getByteArrayField(state, "co"));
     }
 
+    @Test
+    void fQuarterFromSolvedProducesExpectedPermutationAndOrientation() throws Exception {
+        CubeState state = CubeState.solved().apply(Move.F);
+
+        assertArrayEquals(new byte[]{1, 5, 2, 3, 0, 4, 6, 7}, getByteArrayField(state, "cp"));
+        assertArrayEquals(new byte[]{1, 2, 0, 0, 2, 1, 0, 0}, getByteArrayField(state, "co"));
+    }
+
     private static byte[] getByteArrayField(CubeState state, String fieldName) throws Exception {
         Field field = CubeState.class.getDeclaredField(fieldName);
         field.setAccessible(true);

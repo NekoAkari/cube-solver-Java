@@ -79,7 +79,8 @@ public final class CubeState {
     private CubeState applyQuarter(Move.Face face) {
         return switch (face) {
             case U -> applyUQuarter();
-            case R, F -> throw new UnsupportedOperationException(
+            case R -> applyRQuarter();
+            case F -> throw new UnsupportedOperationException(
                     "applyQuarter(" + face + ") not implemented yet");
         };
     }
@@ -98,6 +99,27 @@ public final class CubeState {
             int src = permU[pos];
             newCp[pos] = cp[src];
             newCo[pos] = co[src];
+        }
+
+        return new CubeState(newCp, newCo);
+    }
+
+    /**
+     * R clockwise: cycles the right-layer corners (0,3,7,4) and twists the moved corners.
+     */
+    private CubeState applyRQuarter() {
+        // new[pos] = old[permR[pos]]
+        final int[] permR = {3, 1, 2, 7, 0, 5, 6, 4};
+        // Corner orientation deltas in standard cubie coordinates.
+        final int[] deltaR = {2, 0, 0, 1, 1, 0, 0, 2};
+
+        byte[] newCp = new byte[8];
+        byte[] newCo = new byte[8];
+
+        for (int pos = 0; pos < 8; pos++) {
+            int src = permR[pos];
+            newCp[pos] = cp[src];
+            newCo[pos] = (byte) ((co[src] + deltaR[pos]) % 3);
         }
 
         return new CubeState(newCp, newCo);

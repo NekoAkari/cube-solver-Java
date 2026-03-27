@@ -1,5 +1,11 @@
 # Progress Log
 
+## 2026-03-26
+- Implemented `R` quarter-turn in `solver.model.CubeState`
+- Improved move property tests so implemented moves are still checked even when later moves remain unimplemented
+- Added a direct state assertion for `R` from the solved cube
+- Verified with `mvn test`
+
 ## 2026-02-06
 - Initialized repo and Maven project (`pom.xml`) with Java 17 and JUnit 5
 - Added `solver.cli.Main` and basic JUnit sanity test (mvn test: BUILD SUCCESS)
@@ -11,6 +17,6 @@
 - Pushed commits to GitHub (`main` up to date)
 
 ### Next
-- [ ] Implement quarter-turn logic for U/R/F in `CubeState.applyQuarter()`
-- [ ] Add move property tests (4× turn = identity; move + inverse = identity)
+- [ ] Implement quarter-turn logic for F in `CubeState.applyQuarter()`
 - [ ] Add a simple scramble parser/formatter (optional)
+- [ ] Start solver search package (`solver.search`) with a baseline IDDFS skeleton

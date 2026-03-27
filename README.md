@@ -20,7 +20,7 @@ I’m rebuilding my earlier cube-solver attempt with a stronger focus on:
 - ✓ JaCoCo coverage report
 - ✓ 2×2 cube model (corner permutation/orientation), **immutable** state
 - ✓ Move utilities: ``from(...)``, ``inverse()``, ``parse(...)`` (U/R/F notation)
-- ✓ Implemented face: **U** quarter-turn (R/F planned)
+- ✓ Implemented faces: **U, R** quarter-turns (F planned)
 - ✓ Tests:
   - Property tests (identity/inverse) that automatically skip unimplemented moves
   - Boundary/negative tests for invalid inputs and branch coverage
@@ -71,7 +71,7 @@ The next milestone is to accept a scramble string (e.g., "R U R' U'") and run th
 - [x] Maven project skeleton
 - [x] Add JUnit tests + JaCoCo coverage
 - [x] Implement U move (2×2)
-- [ ] Implement R move (2×2)
+- [x] Implement R move (2×2)
 - [ ] Implement F move (2×2)
 - [ ] Scramble parser/formatter + seedable scrambler
 - [ ] IDDFS solver (baseline)

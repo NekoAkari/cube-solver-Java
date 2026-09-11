@@ -52,6 +52,7 @@ public final class CubeState {
      */
     public CubeState apply(Move move) {
         CubeState s = this;
+        // Repeat the quarter-turn for normal, half, and prime moves.
         for (int i = 0; i < move.turns(); i++) {
             s = s.applyQuarter(move.face());
         }
@@ -81,6 +82,7 @@ public final class CubeState {
             case U -> applyUQuarter();
             case R -> applyRQuarter();
             case F -> applyFQuarter();
+            case D -> applyDQuarter();
         };
     }
 
@@ -142,6 +144,25 @@ public final class CubeState {
             newCo[pos] = (byte) ((co[src] + deltaF[pos]) % 3);
         }
 
+        return new CubeState(newCp, newCo);
+    }
+
+    /**
+     * D clockwise: cycles the bottom-layer corners (4,5,6,7) and leaves orientations unchanged.
+     */
+    private CubeState applyDQuarter() {
+        // new[pos] = old[permD[pos]]
+        final int[] permD = {0, 1, 2, 3, 5, 6, 7, 4};
+
+        byte[] newCp = new byte[8];
+        byte[] newCo = new byte[8];
+
+        for (int pos = 0; pos < 8; pos++) {
+            int src = permD[pos];
+            newCp[pos] = cp[src];
+            // D does not twist corners in the standard cubie model.
+            newCo[pos] = co[src];
+        }
         return new CubeState(newCp, newCo);
     }
 

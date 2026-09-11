@@ -13,10 +13,13 @@ package solver.model;
 public enum Move {
     U(Face.U, 1), U2(Face.U, 2), UP(Face.U, 3),
     R(Face.R, 1), R2(Face.R, 2), RP(Face.R, 3),
-    F(Face.F, 1), F2(Face.F, 2), FP(Face.F, 3);
+    F(Face.F, 1), F2(Face.F, 2), FP(Face.F, 3),
+    D(Face.D, 1), D2(Face.D, 2), DP(Face.D, 3);
 
     /** The face being turned (currently U, R, F only). */
-    public enum Face { U, R, F }
+    public enum Face {
+        U, R, F, D
+    }
 
     private final Face face;
     /** Number of clockwise quarter-turns: 1=90°, 2=180°, 3=270° (i.e., counter-clockwise). */
@@ -42,11 +45,9 @@ public enum Move {
     /**
      * Returns the inverse of this move.
      *
-     * <p>Examples:
-     * <ul>
-     *   <li>{@code U}  ↔ {@code U'}</li>
-     *   <li>{@code U2} ↔ {@code U2}</li>
-     * </ul>
+     * Examples:
+     * {@code U}  ↔ {@code U'}
+     * {@code U2} ↔ {@code U2}
      *
      * @return the inverse move
      */
@@ -72,6 +73,7 @@ public enum Move {
             case U -> (turns == 1) ? U : (turns == 2) ? U2 : UP;
             case R -> (turns == 1) ? R : (turns == 2) ? R2 : RP;
             case F -> (turns == 1) ? F : (turns == 2) ? F2 : FP;
+            case D -> (turns == 1) ? D : (turns == 2) ? D2 : DP;
         };
     }
 
@@ -79,7 +81,7 @@ public enum Move {
      * Parses standard cube notation tokens such as: {@code U}, {@code U2}, {@code U'}, {@code R}, {@code R2}, {@code R'},
      * {@code F}, {@code F2}, {@code F'}.
      *
-     * <p>Whitespace is ignored and the face letter is case-insensitive.
+     * Whitespace is ignored and the face letter is case-insensitive.
      *
      * @param token move token (e.g., "R", "U2", "F'")
      * @return parsed {@link Move}
@@ -100,6 +102,7 @@ public enum Move {
             case 'U' -> Face.U;
             case 'R' -> Face.R;
             case 'F' -> Face.F;
+            case 'D' -> Face.D;
             default -> throw new IllegalArgumentException("Unknown face: " + faceChar);
         };
         // Optional suffix: 2 or '
@@ -140,6 +143,7 @@ public enum Move {
             case U -> "U"; case U2 -> "U2"; case UP -> "U'";
             case R -> "R"; case R2 -> "R2"; case RP -> "R'";
             case F -> "F"; case F2 -> "F2"; case FP -> "F'";
+            case D -> "D"; case D2 -> "D2"; case DP -> "D'";
         };
     }
 }

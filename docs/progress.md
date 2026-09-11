@@ -17,6 +17,13 @@
   - `applyQuarter()` currently stubbed (throws UnsupportedOperationException)
 - Pushed commits to GitHub (`main` up to date)
 
+## 2026-09-11
+- Corrected the `U` and `R` quarter-turn permutations to match standard cube notation
+- Added known-state tests for standard `U`, `R`, and `F` corner permutation/orientation
+- Added equality and hash-code tests for immutable `CubeState` values
+- Verified with `mvn test`: 22 tests passed with no failures, errors, or skipped tests
+- Confirmed 100% instruction, branch, and line coverage for the `solver.model` package
+
 ### Next
 - [ ] Add a simple scramble parser/formatter (optional)
 - [ ] Start solver search package (`solver.search`) with a baseline IDDFS skeleton

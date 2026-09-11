@@ -62,19 +62,43 @@ class MovePropertiesTest {
     }
 
     @Test
+    void uQuarterFromSolvedProducesExpectedPermutationAndOrientation() throws Exception {
+        CubeState state = CubeState.solved().apply(Move.U);
+
+        assertArrayEquals(
+                new byte[]{3, 0, 1, 2, 4, 5, 6, 7},
+                getByteArrayField(state, "cp")
+        );
+        assertArrayEquals(
+                new byte[]{0, 0, 0, 0, 0, 0, 0, 0},
+                getByteArrayField(state, "co")
+        );
+    }
+
+    @Test
     void rQuarterFromSolvedProducesExpectedPermutationAndOrientation() throws Exception {
         CubeState state = CubeState.solved().apply(Move.R);
 
-        assertArrayEquals(new byte[]{3, 1, 2, 7, 0, 5, 6, 4}, getByteArrayField(state, "cp"));
-        assertArrayEquals(new byte[]{2, 0, 0, 1, 1, 0, 0, 2}, getByteArrayField(state, "co"));
+        assertArrayEquals(
+                new byte[]{4, 1, 2, 0, 7, 5, 6, 3},
+                getByteArrayField(state, "cp")
+        );
+        assertArrayEquals(new byte[]{2, 0, 0, 1, 1, 0, 0, 2},
+                getByteArrayField(state, "co")
+        );
     }
 
     @Test
     void fQuarterFromSolvedProducesExpectedPermutationAndOrientation() throws Exception {
         CubeState state = CubeState.solved().apply(Move.F);
 
-        assertArrayEquals(new byte[]{1, 5, 2, 3, 0, 4, 6, 7}, getByteArrayField(state, "cp"));
-        assertArrayEquals(new byte[]{1, 2, 0, 0, 2, 1, 0, 0}, getByteArrayField(state, "co"));
+        assertArrayEquals(
+                new byte[]{1, 5, 2, 3, 0, 4, 6, 7},
+                getByteArrayField(state, "cp")
+        );
+        assertArrayEquals(new byte[]{1, 2, 0, 0, 2, 1, 0, 0},
+                getByteArrayField(state, "co")
+        );
     }
 
     private static byte[] getByteArrayField(CubeState state, String fieldName) throws Exception {

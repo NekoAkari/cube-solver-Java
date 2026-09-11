@@ -89,7 +89,7 @@ public final class CubeState {
      */
     private CubeState applyUQuarter() {
         // new[pos] = old[permU[pos]]
-        final int[] permU = {1, 2, 3, 0, 4, 5, 6, 7};
+        final int[] permU = {3, 0, 1, 2, 4, 5, 6, 7};
 
         byte[] newCp = new byte[8];
         byte[] newCo = new byte[8];
@@ -108,7 +108,7 @@ public final class CubeState {
      */
     private CubeState applyRQuarter() {
         // new[pos] = old[permR[pos]]
-        final int[] permR = {3, 1, 2, 7, 0, 5, 6, 4};
+        final int[] permR = {4, 1, 2, 0, 7, 5, 6, 3};
         // Corner orientation deltas in standard cubie coordinates.
         final int[] deltaR = {2, 0, 0, 1, 1, 0, 0, 2};
 

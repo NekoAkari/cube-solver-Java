@@ -4,7 +4,7 @@
 ![Maven](https://img.shields.io/badge/Build-Maven-informational)
 ![JUnit](https://img.shields.io/badge/Tests-JUnit%205-informational)
 ![JaCoCo](https://img.shields.io/badge/Coverage-JaCoCo-informational)
-![Coverage](https://img.shields.io/badge/Coverage-90%25-brightgreen)
+![Model Coverage](https://img.shields.io/badge/Model%20Coverage-100%25-brightgreen)
 
 A Rubik’s Cube solver written in Java. This project starts with a **2×2 (Pocket Cube)** solver and is designed to be extended.
 
@@ -22,7 +22,9 @@ I’m rebuilding my earlier cube-solver attempt with a stronger focus on:
 - ✓ Move utilities: ``from(...)``, ``inverse()``, ``parse(...)`` (U/R/F notation)
 - ✓ Implemented faces: **U, R, F** quarter-turns
 - ✓ Tests:
-  - Property tests (identity/inverse) that automatically skip unimplemented moves
+  - Property tests for four-turn identity and move/inverse behavior
+  - Known-state tests for standard U/R/F corner permutation and orientation
+  - Equality/hash-code tests for immutable cube states
   - Boundary/negative tests for invalid inputs and branch coverage
 
 ## Planned features
